@@ -1,5 +1,6 @@
 import {Link} from 'react-router';
-import {Image, Money, Pagination} from '@shopify/hydrogen';
+import {Money, Pagination} from '@shopify/hydrogen';
+import {ProductImageWithFallback} from './ProductImageWithFallback';
 import {urlWithTrackingParams} from '~/lib/search';
 
 /**
@@ -110,9 +111,11 @@ function SearchResultsProducts({term, products}) {
             return (
               <div className="search-results-item" key={product.id}>
                 <Link prefetch="intent" to={productUrl}>
-                  {image && (
-                    <Image data={image} alt={product.title} width={50} />
-                  )}
+                  <ProductImageWithFallback
+                    image={image}
+                    alt={product.title}
+                    width={50}
+                  />
                   <div>
                     <p>{product.title}</p>
                     <small>{price && <Money data={price} />}</small>

@@ -6,6 +6,7 @@ import {
   urlWithTrackingParams,
 } from '~/lib/search';
 import {useAside} from './Aside';
+import {ProductImageWithFallback} from './ProductImageWithFallback';
 
 /**
  * Component that renders predictive search results
@@ -185,14 +186,12 @@ function SearchResultsPredictiveProducts({term, products, closeSearch}) {
           return (
             <li className="predictive-search-result-item" key={product.id}>
               <Link to={productUrl} onClick={closeSearch}>
-                {image && (
-                  <Image
-                    alt={image.altText ?? ''}
-                    src={image.url}
-                    width={50}
-                    height={50}
-                  />
-                )}
+                <ProductImageWithFallback
+                  alt={image?.altText ?? ''}
+                  image={image}
+                  width={50}
+                  height={50}
+                />
                 <div>
                   <p>{product.title}</p>
                   <small>{price && <Money data={price} />}</small>

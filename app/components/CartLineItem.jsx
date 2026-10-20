@@ -1,8 +1,9 @@
-import {CartForm, Image} from '@shopify/hydrogen';
+import {CartForm} from '@shopify/hydrogen';
 import {useVariantUrl} from '~/lib/variants';
 import {Link} from 'react-router';
 import {ProductPrice} from './ProductPrice';
 import {useAside} from './Aside';
+import {ProductImageWithFallback} from './ProductImageWithFallback';
 
 /**
  * A single line item in the cart. It displays the product image, title, price.
@@ -26,16 +27,14 @@ export function CartLineItem({layout, line, childrenMap}) {
   return (
     <li key={id} className="cart-line">
       <div className="cart-line-inner">
-        {image && (
-          <Image
-            alt={title}
-            aspectRatio="1/1"
-            data={image}
-            height={100}
-            loading="lazy"
-            width={100}
-          />
-        )}
+        <ProductImageWithFallback
+          alt={title}
+          aspectRatio="1/1"
+          image={image}
+          height={100}
+          loading="lazy"
+          width={100}
+        />
 
         <div>
           <Link

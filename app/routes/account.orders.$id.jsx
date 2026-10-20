@@ -1,5 +1,6 @@
 import {redirect, useLoaderData} from 'react-router';
-import {Money, Image} from '@shopify/hydrogen';
+import {Money} from '@shopify/hydrogen';
+import {ProductImageWithFallback} from '~/components/ProductImageWithFallback';
 import {CUSTOMER_ORDER_QUERY} from '~/graphql/customer-account/CustomerOrderQuery';
 
 /**
@@ -193,11 +194,14 @@ function OrderLineRow({lineItem}) {
     <tr key={lineItem.id}>
       <td>
         <div>
-          {lineItem?.image && (
-            <div>
-              <Image data={lineItem.image} width={96} height={96} />
-            </div>
-          )}
+          <div>
+            <ProductImageWithFallback
+              image={lineItem?.image}
+              alt={lineItem.title}
+              width={96}
+              height={96}
+            />
+          </div>
           <div>
             <p>{lineItem.title}</p>
             <small>{lineItem.variantTitle}</small>
